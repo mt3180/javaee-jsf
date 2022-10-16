@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper
+    namespace="jp.co.sample.dao.LoginUserMapper">
+
+    <select id="selectByUserId" resultType="jp.co.sample.dto.LoginUser">
+        SELECT
+        login_user.user_id
+        ,login_user.user_name
+        ,login_user.password
+        ,login_user.role_id
+        FROM
+        login_user
+        WHERE login_user.user_id =
+        #{userId}
+    </select>
+</mapper>

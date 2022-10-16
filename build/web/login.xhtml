@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <h:body>
+        <ui:composition template="/layout/template.xhtml">
+            <ui:define name="title">ログイン</ui:define>
+            <ui:define name="content">
+
+                <div class="container">
+                    <div class="card mt-3">
+                        <div class="card-body">
+                            <h:form>
+                                <div class="mb-3">
+                                    <h:outputLabel for="userId" value="ユーザID" styleClass="form-label"/> 
+                                    <h:inputText id="userId" value="#{loginManagedBean.userId}" styleClass="form-control" />
+                                </div>
+                                <div class="mb-3">
+                                    <h:outputLabel for="password" value="パスワード" styleClass="form-label"/>
+                                    <h:inputSecret id="password" value="#{loginManagedBean.password}" styleClass="form-control"/>
+                                </div>
+                                <h:commandButton  value="ログイン" action="#{loginManagedBean.login()}" styleClass="btn btn-primary"/> 
+                            </h:form>
+                        </div>
+                    </div>
+                </div>
+
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>

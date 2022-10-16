@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <h:body>
+        <ui:composition template="/layout/template.xhtml">
+            <ui:define name="title">ホーム</ui:define>
+            <ui:define name="content">
+                <div class="container">
+
+                    <table class="table table-sm table-striped table-hover mt-3">
+                        <thead>
+                            <tr>
+                                <th>納品ID</th>
+                                <th>件名</th>
+                                <th>納品日</th>
+                                <th>納品金額</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <ui:repeat var="item" value="#{nouhinshoListManagedBean.list()}" varStatus="status">
+                                <tr>
+                                    <td>#{item.nouhinId}</td>
+                                    <td>#{item.title}</td>
+                                    <td>#{item.nouhinDate}</td>
+                                    <td>#{item.nouhinKingaku}</td>
+                                    <td><h:form>
+                                            <h:commandLink  value="ダウンロード" action="#{nouhinshoListManagedBean.download(item.nouhinId)}" styleClass="btn btn-sm btn-primary"/> 
+                                        </h:form>
+                                    </td>
+                                </tr>
+                            </ui:repeat>
+                        </tbody>
+                    </table>
+
+                </div>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
