@@ -9,5 +9,5 @@ import jp.co.sample.dto.NouhinshoListItem;
  */
 public interface NouhinshoMapper {
     
-    List<NouhinshoListItem> selectList();
+    List<NouhinshoListItem> selectList(String searchWord);
 }

@@ -26,6 +26,14 @@ import org.apache.logging.log4j.Logger;
 public class NouhinshoListManagedBean implements Serializable {
 
     /**
+     * 検索ワード
+     */
+    private String searchWord;
+    
+    /** 納品書リスト */
+    private List<NouhinshoListItem> nouhinshoList;
+    
+    /**
      * FacesContext
      */
     private final FacesContext facesContext;
@@ -49,16 +57,18 @@ public class NouhinshoListManagedBean implements Serializable {
         logger.info("NouhinshoListManagedBean()");
         this.nouhinshoListLogic = nouhinshoListLogic;
         this.facesContext = facesContext;
+        this.nouhinshoList = nouhinshoListLogic.list(searchWord);
     }
 
     /**
      * 納品書一覧データ取得
      *
-     * @return 納品書一覧データ
+     * @return 
      */
-    public List<NouhinshoListItem> list() {
+    public String search() {
         logger.info("list()");
-        return nouhinshoListLogic.list();
+        this.nouhinshoList = nouhinshoListLogic.list(searchWord);
+        return "home";
     }
 
     /**

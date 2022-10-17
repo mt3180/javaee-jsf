@@ -16,6 +16,16 @@
         from nouhinsho
          inner join nouhinsho_item
          on nouhinsho.NOUHIN_ID = NOUHINSHO_ITEM.NOUHIN_ID
+        where
+         1 = 1
+        <if test="searchWord != null and searchWord != ''">
+         and (  
+            nouhinsho.title ||
+            nouhinsho.nouhin_id ||
+            nouhinsho.kaisha_name ||
+            nouhinsho.nouhin_kaisha_name
+            ) like '%' || #{searchWord} || '%'
+        </if>
         group by 
           nouhinsho.nouhin_id
          ,nouhinsho.title

@@ -23,10 +23,11 @@ public class NouhinshoListLogic {
     /**
      * 納品書一覧データの取得
      *
+     * @param searchWord 検索ワード
      * @return 納品書一覧データ
      */
-    public List<NouhinshoListItem> list() {
+    public List<NouhinshoListItem> list(String searchWord) {
         NouhinshoMapper nouhinshoMapper = sqlSession.getMapper(NouhinshoMapper.class);
-        return nouhinshoMapper.selectList();
+        return nouhinshoMapper.selectList(searchWord);
     }
 }
