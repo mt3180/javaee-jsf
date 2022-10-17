@@ -1,15 +1,14 @@
 package jp.co.sample.logic;
 
-import javax.enterprise.context.Dependent;
+import javax.ejb.Stateless;
 import javax.inject.Inject;
-import javax.transaction.Transactional;
 import jp.co.sample.dao.LoginUserMapper;
 import org.apache.ibatis.session.SqlSession;
 
 /**
  * ログイン処理
  */
-@Dependent
+@Stateless
 public class LoginLogic {
 
     /**
@@ -18,9 +17,6 @@ public class LoginLogic {
     @Inject
     SqlSession sqlSession;
 
-    public LoginLogic(){
-        
-    }
     /**
      * 認証処理
      *
@@ -35,4 +31,5 @@ public class LoginLogic {
                 .map(lu -> lu.getPassword().equals(password))
                 .orElse(Boolean.FALSE);
     }
+     
 }

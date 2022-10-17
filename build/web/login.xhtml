@@ -6,6 +6,10 @@
     <h:body>
         <ui:composition template="/layout/template.xhtml">
             <ui:define name="title">ログイン</ui:define>
+            <ui:define name="top">
+                <ui:remove>ヘッダー表示領域</ui:remove>
+                <ui:include src="/layout/header_not_login.xhtml"/>
+            </ui:define>
             <ui:define name="content">
 
                 <div class="card">

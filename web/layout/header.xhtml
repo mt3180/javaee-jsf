@@ -3,27 +3,41 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html">
-    <h:head>
-        <title>header</title>
-    </h:head>
     <h:body>
         <ui:composition>
             <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
                 <div class="container-fluid">
-                    <a class="navbar-brand" href="#">サンプルアプリ</a>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <h:link outcome="home" class="navbar-brand">サンプルアプリ</h:link>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" 
+                            data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" 
+                            aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                             <li class="nav-item">
-                                <a class="nav-link" href="#">機能A</a>
+                                <h:link outcome="screenA" class="nav-link">機能A</h:link>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">機能B</a>
+                                <h:link outcome="screenB" class="nav-link">機能B</h:link>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">機能C</a>
+                                <h:link outcome="screenC" class="nav-link">機能C</h:link>
+                            </li>
+                        </ul>
+                        <span class="navbar-text mx-2 d-sm-block d-none">
+                            <i class="fa-solid fa-user"></i>
+                            <span>てすとユーザ</span>
+                        </span>
+                        <ul class="navbar-nav ml-auto">
+                            <li class="nav-item">
+                                <h:form>
+                                    <h:commandLink  value="ログアウト" 
+                                                    action="#{loginManagedBean.logout()}" 
+                                                    styleClass="nav-link pr-1">
+                                        <i class="fa-solid fa-right-from-bracket"></i>
+                                    </h:commandLink>
+                                </h:form>
                             </li>
                         </ul>
                     </div>

@@ -68,4 +68,9 @@ public class LoginManagedBean implements Serializable {
         }
     }
 
+    public String logout() {
+        logger.info("logout()");
+        facesContext.getExternalContext().invalidateSession();
+        return "/login?faces-redirect=true";
+    }
 }

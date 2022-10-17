@@ -1,22 +1,16 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package jp.co.sample.config;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UncheckedIOException;
-import java.util.HashMap;
-import java.util.Map;
-import javax.annotation.PostConstruct;
-import javax.ejb.Startup;
+import javax.ejb.Stateless;
+import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.inject.Disposes;
 import javax.enterprise.inject.Produces;
-import javax.inject.Singleton;
+import javax.inject.Inject;
+import jp.co.sample.service.NouhinshoListManagedBean;
 import org.apache.ibatis.io.Resources;
-import org.apache.ibatis.session.Configuration;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
@@ -26,57 +20,61 @@ import org.apache.logging.log4j.Logger;
 /**
  *
  */
-@Singleton
-@Startup
+@Stateless
 public class MyBatisSqlSessionProvidor {
 
-    private final Map<String, SqlSessionFactory> sqlSessionFactoryCash
-            = new HashMap<>();
-    private String defaultId;
-
+    @Inject
+    private SqlSessionFactory sampleSessionFactory;
     /**
      * ロガー
      */
     private final static Logger logger = LogManager.getLogger(MyBatisSqlSessionProvidor.class.getName());
-    /*
-     * SqlSessionFactoryのインスタンスをCDI経由でインジェクションする
+
+    /**
+     * sampleデータソースのSqlSessionFactoryのインスタンスをCDIに登録
+     *
+     * @return SqlSessionFactory
      */
-    @PostConstruct
-    public void initialize()  {
-        loadDefaultEnvironment();
+    @ApplicationScoped
+    @Produces
+    public SqlSessionFactory sampleSessionFactory() {
+        return this.create("sample");
     }
 
-    private void loadDefaultEnvironment() {
-        try ( InputStream in = Resources.getResourceAsStream("mybatis-config.xml")) {
+    /**
+     * SqlSessionFactoryを作成
+     *
+     *
+     * @param environment environment
+     * @return SqlSessionFactory
+     */
+    private SqlSessionFactory create(String environment) {
+        try ( InputStream stream = Resources.getResourceAsStream("mybatis-config.xml")) {
             SqlSessionFactoryBuilder builder = new SqlSessionFactoryBuilder();
-
-            //デフォルトのenvironmentを読み込む
-            SqlSessionFactory defaultEnvironmentFactory = builder.build(in);
-            Configuration con = defaultEnvironmentFactory.getConfiguration();
-            defaultId = con.getEnvironment().getId();
-            sqlSessionFactoryCash.put(defaultId, defaultEnvironmentFactory);
+            return builder.build(stream, environment);
         } catch (IOException e) {
             throw new UncheckedIOException(e);
         }
     }
 
-    /**
-     * sqlSessionをインジェクトできるようにする
-     * @return sqlSession
+    /*
+     * `SqlSession`をインジェクションするためのメソッド
+     * Request毎にopen/closeするため`@RequestScoped`を指定
+     * `@Produces`でCDI経由でインスタンスを取得できるようになる
      */
-    @Produces
     @RequestScoped
-    public SqlSession openSession() {
-        logger.debug("openSession()");
-        return sqlSessionFactoryCash.get(defaultId).openSession();
+    @Produces
+    public SqlSession openSampleSession() {
+        logger.info("openSampleSession()");
+        return sampleSessionFactory.openSession();
     }
-
+    
     /**
-     * sqlSessionをクローズする
+     * Requestが完了したときに`SqlSession`をcloseする
      * @param sqlSession 
      */
-    public void closeSession(@Disposes SqlSession sqlSession) {
-        logger.debug("closeSession()");
+    public void closeSampleSession(@Disposes SqlSession sqlSession) {
+        logger.info("closeSampleSession()");
         sqlSession.close();
     }
 }

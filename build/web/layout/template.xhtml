@@ -6,15 +6,12 @@
 
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <!--        <link rel="stylesheet" type="text/css" href="resources/lib/bootstrap/5.0.2/css/bootstrap.bundle.min.css"/>
-                <link rel="stylesheet" type="text/css" href="resources/lib/datatables/datatables.min.css"/>-->
-        <link rel="stylesheet" type="text/css" href="resources/lib/Bootstrap-5-5.1.3/css/bootstrap.min.css"/>
-        <link rel="stylesheet" type="text/css" href="resources/lib/DataTables-1.12.1/css/dataTables.bootstrap5.min.css"/>
-        <link rel="stylesheet" type="text/css" href="resources/lib/Responsive-2.3.0/css/responsive.bootstrap5.min.css"/>
-        <link rel="stylesheet" type="text/css" href="resources/lib/Select-1.4.0/css/select.bootstrap5.min.css"/>
 
-        <link rel="stylesheet" type="text/css" href="resources/lib/fontawesome/6.2.0/css/all.css" />
-        <link rel="stylesheet" type="text/css" href="resources/css/main.css" />
+        <link rel="stylesheet" type="text/css" href="static/lib/Bootstrap-5-5.1.3/css/bootstrap.min.css"/>
+        <link rel="stylesheet" type="text/css" href="static/lib/DataTables-1.12.1/css/dataTables.bootstrap5.min.css"/>
+        <link rel="stylesheet" type="text/css" href="static/lib/Responsive-2.3.0/css/responsive.bootstrap5.min.css"/>
+        <link rel="stylesheet" type="text/css" href="static/lib/Select-1.4.0/css/select.bootstrap5.min.css"/>
+        <link rel="stylesheet" type="text/css" href="static/css/main.css" />
         <title>サンプルアプリ＞<ui:insert name="title"/></title>
     </h:head>
     <h:body>
@@ -25,6 +22,8 @@
             </ui:insert>
         </div>
         <div id="content">
+            <ui:remove>タイトル表示領域</ui:remove>
+            <h2 class="m-3"><ui:insert name="title"/></h2>
             <ui:remove>メッセージ表示領域</ui:remove>
             <h:messages globalOnly="true" style="list-style:none" styleClass="my-2" errorClass="alert alert-danger" infoClass="alert alert-info" />
             <div class="container-fluid my-2">
@@ -32,22 +31,22 @@
                 <ui:insert name="content"/>
             </div>
         </div>
-        <div id="bottom">
+        <div id="bottom" class="my-2">
             <ui:insert name="bottom">
                 <ui:remove>フッター表示領域</ui:remove>
                 <ui:include src="/layout/footer.xhtml"/>
             </ui:insert>
         </div>  
-        <!--        <script type="text/javascript" src="resources/lib/bootstrap/5.0.2/js/bootstrap.min.js"></script>
-                <script type="text/javascript" src="resources/lib/datatables/datatables.min.js"></script>-->
-        <script type="text/javascript" src="resources/lib/jQuery-3.6.0/jquery-3.6.0.min.js"></script>
-        <script type="text/javascript" src="resources/lib/Bootstrap-5-5.1.3/js/bootstrap.bundle.min.js"></script>
-        <script type="text/javascript" src="resources/lib/DataTables-1.12.1/js/jquery.dataTables.min.js"></script>
-        <script type="text/javascript" src="resources/lib/DataTables-1.12.1/js/dataTables.bootstrap5.min.js"></script>
-        <script type="text/javascript" src="resources/lib/Responsive-2.3.0/js/dataTables.responsive.min.js"></script>
-        <script type="text/javascript" src="resources/lib/Responsive-2.3.0/js/responsive.bootstrap5.js"></script>
-        <script type="text/javascript" src="resources/lib/Select-1.4.0/js/dataTables.select.min.js"></script>
-        <script type="text/javascript" src="resources/js/main.js"></script>
+
+        <script type="text/javascript" src="static/lib/jQuery-3.6.0/jquery-3.6.0.min.js"></script>
+        <script type="text/javascript" src="static/lib/Bootstrap-5-5.1.3/js/bootstrap.bundle.min.js"></script>
+        <script type="text/javascript" src="static/lib/DataTables-1.12.1/js/jquery.dataTables.min.js"></script>
+        <script type="text/javascript" src="static/lib/DataTables-1.12.1/js/dataTables.bootstrap5.min.js"></script>
+        <script type="text/javascript" src="static/lib/Responsive-2.3.0/js/dataTables.responsive.min.js"></script>
+        <script type="text/javascript" src="static/lib/Responsive-2.3.0/js/responsive.bootstrap5.js"></script>
+        <script type="text/javascript" src="static/lib/Select-1.4.0/js/dataTables.select.min.js"></script>
+        <script type="text/javascript" src="static/lib/fontawesome/6.2.0/js/all.min.js"></script>
+        <script type="text/javascript" src="static/js/main.js"></script>
         <ui:remove>スクリプト表示領域</ui:remove>
         <ui:insert name="script"/>
     </h:body>

@@ -1,9 +1,8 @@
 package jp.co.sample.logic;
 
 import java.util.List;
-import javax.enterprise.context.Dependent;
+import javax.ejb.Stateless;
 import javax.inject.Inject;
-import javax.transaction.Transactional;
 import jp.co.sample.dao.NouhinshoMapper;
 import jp.co.sample.dto.NouhinshoListItem;
 import org.apache.ibatis.session.SqlSession;
@@ -11,7 +10,7 @@ import org.apache.ibatis.session.SqlSession;
 /**
  * 納品書一覧処理
  */
-@Dependent
+@Stateless
 public class NouhinshoListLogic {
 
     /**
@@ -20,9 +19,6 @@ public class NouhinshoListLogic {
     @Inject
     SqlSession sqlSession;
 
-    public NouhinshoListLogic() {
-
-    }
 
     /**
      * 納品書一覧データの取得
