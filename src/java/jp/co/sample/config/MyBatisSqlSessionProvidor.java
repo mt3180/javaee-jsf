@@ -11,7 +11,6 @@ import java.util.HashMap;
 import java.util.Map;
 import javax.annotation.PostConstruct;
 import javax.ejb.Startup;
-import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.inject.Disposes;
 import javax.enterprise.inject.Produces;
@@ -21,6 +20,8 @@ import org.apache.ibatis.session.Configuration;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /**
  *
@@ -33,6 +34,10 @@ public class MyBatisSqlSessionProvidor {
             = new HashMap<>();
     private String defaultId;
 
+    /**
+     * ロガー
+     */
+    private final static Logger logger = LogManager.getLogger(MyBatisSqlSessionProvidor.class.getName());
     /*
      * SqlSessionFactoryのインスタンスをCDI経由でインジェクションする
      */
@@ -62,6 +67,7 @@ public class MyBatisSqlSessionProvidor {
     @Produces
     @RequestScoped
     public SqlSession openSession() {
+        logger.debug("openSession()");
         return sqlSessionFactoryCash.get(defaultId).openSession();
     }
 
@@ -70,6 +76,7 @@ public class MyBatisSqlSessionProvidor {
      * @param sqlSession 
      */
     public void closeSession(@Disposes SqlSession sqlSession) {
+        logger.debug("closeSession()");
         sqlSession.close();
     }
 }

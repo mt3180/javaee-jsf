@@ -1,0 +1,77 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:body>
+        <ui:composition template="/layout/template.xhtml">
+            <ui:define name="title">ホーム</ui:define>
+            <ui:define name="content">
+
+                <h:dataTable var="item" value="#{nouhinshoListManagedBean.list()}" styleClass="table table-sm table-striped table-hover">
+                    <h:column>
+                        <f:facet name="header">納品ID</f:facet>
+                        <h:outputText value="#{item.nouhinId}" />
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">件名</f:facet>
+                        <h:outputText value="#{item.title}" />
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">納品日</f:facet>
+                        <h:outputText value="#{item.nouhinDate}" >
+                            <f:convertDateTime pattern="yyyy/MM/dd"/>
+                        </h:outputText>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">納品金額</f:facet>
+                        <h:outputText value="#{item.nouhinKingaku}" >
+                            <f:convertNumber pattern="###,##0" />
+                        </h:outputText>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">操作</f:facet>
+                        <h:form>
+                            <h:commandLink  value="ダウンロード" action="#{nouhinshoListManagedBean.download(item.nouhinId)}" styleClass="btn btn-sm btn-primary"/> 
+                        </h:form>
+                    </h:column>
+                </h:dataTable>
+
+
+                <table class="table table-sm table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th>納品ID</th>
+                            <th>件名</th>
+                            <th>納品日</th>
+                            <th>納品金額</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <ui:repeat var="item" value="#{nouhinshoListManagedBean.list()}" varStatus="status">
+                            <tr>
+                                <td><h:outputText value="#{item.nouhinId}" /></td>
+                                <td><h:outputText value="#{item.title}" /></td>
+                                <td><h:outputText value="#{item.nouhinDate}" >
+                                        <f:convertDateTime pattern="yyyy/MM/dd"/>
+                                    </h:outputText>
+                                </td>
+                                <td><h:outputText value="#{item.nouhinKingaku}" >
+                                        <f:convertNumber pattern="###,##0" />
+                                    </h:outputText>
+                                </td>
+                                <td><h:form>
+                                        <h:commandLink  value="ダウンロード" action="#{nouhinshoListManagedBean.download(item.nouhinId)}" styleClass="btn btn-sm btn-primary"/> 
+                                    </h:form>
+                                </td>
+                            </tr>
+                        </ui:repeat>
+                    </tbody>
+                </table>
+
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>

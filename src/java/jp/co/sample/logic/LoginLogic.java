@@ -2,6 +2,7 @@ package jp.co.sample.logic;
 
 import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
+import javax.transaction.Transactional;
 import jp.co.sample.dao.LoginUserMapper;
 import org.apache.ibatis.session.SqlSession;
 
@@ -14,13 +15,12 @@ public class LoginLogic {
     /**
      * SQLセッション
      */
-    private final SqlSession sqlSession;
-
     @Inject
-    public LoginLogic(SqlSession sqlSession) {
-        this.sqlSession = sqlSession;
-    }
+    SqlSession sqlSession;
 
+    public LoginLogic(){
+        
+    }
     /**
      * 認証処理
      *

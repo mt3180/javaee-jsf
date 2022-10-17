@@ -3,6 +3,7 @@ package jp.co.sample.logic;
 import java.util.List;
 import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
+import javax.transaction.Transactional;
 import jp.co.sample.dao.NouhinshoMapper;
 import jp.co.sample.dto.NouhinshoListItem;
 import org.apache.ibatis.session.SqlSession;
@@ -13,11 +14,14 @@ import org.apache.ibatis.session.SqlSession;
 @Dependent
 public class NouhinshoListLogic {
 
-    private final SqlSession sqlSession;
-
+    /**
+     * SQLセッション
+     */
     @Inject
-    public NouhinshoListLogic(SqlSession sqlSession) {
-        this.sqlSession = sqlSession;
+    SqlSession sqlSession;
+
+    public NouhinshoListLogic() {
+
     }
 
     /**

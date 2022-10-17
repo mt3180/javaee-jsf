@@ -48,7 +48,7 @@ public class LoginManagedBean implements Serializable {
     /**
      * コンストラクタ
      *
-     * @param loginLogic ログイン処理ロジッククラス
+     * @param loginLogic
      * @param facesContext FacesContext
      */
     @Inject

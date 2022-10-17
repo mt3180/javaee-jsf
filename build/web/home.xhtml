@@ -2,40 +2,73 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
     <h:body>
         <ui:composition template="/layout/template.xhtml">
             <ui:define name="title">ホーム</ui:define>
             <ui:define name="content">
-                <div class="container">
 
-                    <table class="table table-sm table-striped table-hover mt-3">
-                        <thead>
-                            <tr>
-                                <th>納品ID</th>
-                                <th>件名</th>
-                                <th>納品日</th>
-                                <th>納品金額</th>
-                                <th>操作</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <ui:repeat var="item" value="#{nouhinshoListManagedBean.list()}" varStatus="status">
-                                <tr>
-                                    <td>#{item.nouhinId}</td>
-                                    <td>#{item.title}</td>
-                                    <td>#{item.nouhinDate}</td>
-                                    <td>#{item.nouhinKingaku}</td>
-                                    <td><h:form>
-                                            <h:commandLink  value="ダウンロード" action="#{nouhinshoListManagedBean.download(item.nouhinId)}" styleClass="btn btn-sm btn-primary"/> 
-                                        </h:form>
-                                    </td>
-                                </tr>
-                            </ui:repeat>
-                        </tbody>
-                    </table>
+                <h:form>
+                    <div class="row mb-3">
+                        <div class="col-6">
+                            <input
+                                type="text"
+                                class="form-control"
+                                id="searchWord"
+                                name="searchWord"
+                                placeholder="フリーワード検索"
+                                />
+                        </div>
+                        <div class="col-auto">
+                            <button
+                                id="searchButton"
+                                type="button"
+                                class="btn btn-primary"
+                                >
+                                <i class="fa-solid fa-magnifying-glass"></i> 検索
+                            </button>
+                        </div>
+                    </div>
+                </h:form>
 
-                </div>
+                <h:dataTable id="sampleDt" var="item" value="#{nouhinshoListManagedBean.list()}" 
+                             headerClass="bg-light"
+                             style="width: 100%;" 
+                             styleClass="table table-sm table-bordered table-stripe table-hover dt-responsive nowrap">
+                    <h:column>
+                        <f:facet name="header">納品ID</f:facet>
+                        <h:outputText value="#{item.nouhinId}" />
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">件名</f:facet>
+                        <h:outputText value="#{item.title}" />
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">納品日</f:facet>
+                        <h:outputText value="#{item.nouhinDate}" >
+                            <f:convertDateTime pattern="yyyy/MM/dd"/>
+                        </h:outputText>
+                    </h:column>
+                    <h:column class="text-end">
+                        <f:facet name="header">納品金額</f:facet>
+                        <h:outputText value="#{item.nouhinKingaku}">
+                            <f:convertNumber pattern="###,##0" />
+                        </h:outputText>
+                    </h:column>
+                    <h:column class="text-center">
+                        <f:facet name="header">操作</f:facet>
+                        <h:form>
+                            <h:commandLink  value="ダウンロード" action="#{nouhinshoListManagedBean.download(item.nouhinId)}" styleClass="btn btn-sm btn-primary"/> 
+                        </h:form>
+                    </h:column>
+                </h:dataTable>
+
+            </ui:define>
+
+            <ui:define name="script">
+                <script type="text/javascript" src="resources/js/home.js" ></script>
             </ui:define>
         </ui:composition>
     </h:body>
